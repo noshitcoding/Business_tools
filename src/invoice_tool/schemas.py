@@ -1,7 +1,7 @@
 """Pydantic schemas used by the API."""
 from __future__ import annotations
 
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from typing import Literal, Optional
 
 from pydantic import BaseModel, Field, HttpUrl, validator
@@ -61,7 +61,7 @@ class InvoiceCreate(BaseModel):
         issue_date: Optional[date] = values.get("issue_date")
         terms: Optional[PaymentTerms] = values.get("payment_terms")
         if issue_date and terms:
-            return issue_date + terms.due_days
+            return issue_date + timedelta(days=terms.due_days)
         return value
 
 

@@ -28,10 +28,11 @@ def register_payment(payload: PaymentCreate) -> Payment:
             source=payload.source,
         )
         session.add(payment)
-        session.flush()
-        total_paid = sum(p.amount for p in invoice.payments) + payload.amount
+        existing_payments_total = sum(p.amount for p in invoice.payments)
+        total_paid = existing_payments_total + payload.amount
         determine_status(invoice, total_paid)
         session.add(invoice)
+        session.flush()
         session.refresh(payment)
         return payment
 
