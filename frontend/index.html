@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Gehärtetes Verwaltungsportal für das Rechnungs-Backend mit Fokus auf Datenschutz und Angriffsschutz."
+    />
+    <title>Rechnungstool – Gesicherte Verwaltungsoberfläche</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Rechnungstool – Gesicherter Zugang</h1>
+      <p>
+        Diese Oberfläche stellt eine gehärtete Einstiegsebene für das Rechnungsbackend dar.
+        Alle externen Aufrufe werden strikt kontrolliert und folgen dem Zero-Trust-Prinzip.
+      </p>
+      <p class="endpoint">
+        Backend-Endpunkt:
+        <code id="backend-endpoint" aria-live="polite">wird initialisiert…</code>
+      </p>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Aktive Schutzmaßnahmen</h2>
+        <ul class="feature-list">
+          <li>
+            <strong>Host- und Origin-Whitelisting:</strong> Das Backend akzeptiert ausschließlich
+            explizit freigegebene Host-Header und CORS-Ursprünge.
+          </li>
+          <li>
+            <strong>Verstärkte HTTP-Header:</strong> CSP, HSTS, Referrer- und Permissions-Policy
+            werden serverseitig erzwungen, um Angriffsflächen zu minimieren.
+          </li>
+          <li>
+            <strong>Container-Härtung:</strong> Backend-Prozesse laufen nicht als Root und der
+            Nginx-Stack liefert nur freigegebene, statische Assets aus.
+          </li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Deployment-Empfehlungen</h2>
+        <ol class="checklist">
+          <li>
+            TLS-Termination vor dem Reverse Proxy einrichten und nur verschlüsselte Zugriffe
+            zulassen.
+          </li>
+          <li>
+            Firewall-Regeln definieren, die ausschließlich vertrauenswürdige Quellnetze auf
+            Port&nbsp;8000/8080 zulassen.
+          </li>
+          <li>
+            Service-Konten und API-Tokens zentral verwalten, um automatisierte Abläufe abzusichern.
+          </li>
+        </ol>
+      </section>
+
+      <section class="card">
+        <h2>Integration</h2>
+        <p>
+          Anwendungen sollten ausschließlich über authentifizierte Service-to-Service-Kanäle mit dem
+          Rechnungsbackend kommunizieren. Menschliche Benutzer melden sich über separate,
+          rollenbasierte Portale an.
+        </p>
+        <p>
+          Weitere Module (z.&nbsp;B. Rechnungsfreigabe oder Compliance-Reporting) können hier nahtlos
+          verlinkt werden, ohne sensible Schnittstellen direkt offenzulegen.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <small>
+        ©
+        <span id="current-year"></span>
+        – Sicherheitsoptimierte Bereitstellung des Rechnungstools.
+      </small>
+    </footer>
+
+    <script src="./env.js" defer></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
