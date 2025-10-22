@@ -28,10 +28,10 @@ def register_payment(payload: PaymentCreate) -> Payment:
             source=payload.source,
         )
         session.add(payment)
-        # ``invoice.payments`` already includes the newly created payment once the
-        # relationship is synchronized, so summing the collection gives us the
-        # up-to-date total without any manual adjustments.
-        total_paid = sum(p.amount for p in invoice.payments)
+        payments = list(invoice.payments)
+        total_paid = sum(p.amount for p in payments)
+        if payment not in payments:
+            total_paid += payload.amount
         determine_status(invoice, total_paid)
         session.add(invoice)
         session.flush()
