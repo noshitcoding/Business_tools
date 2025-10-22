@@ -1,0 +1,99 @@
+:root {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #1f2933;
+  background-color: #f5f7fa;
+}
+
+body {
+  margin: 0;
+  padding: 0 1rem 2rem;
+}
+
+header {
+  margin: 2rem auto 1.5rem;
+  max-width: 900px;
+  text-align: center;
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+button {
+  background-color: #2563eb;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #1d4ed8;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+input {
+  border: 1px solid #cbd5f5;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+}
+
+.result {
+  margin-top: 1rem;
+  white-space: pre-wrap;
+  background: rgba(37, 99, 235, 0.05);
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+  font-size: 0.95rem;
+  color: #1f2937;
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.result.error {
+  background: rgba(220, 38, 38, 0.08);
+  color: #991b1b;
+}
+
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: #6b7280;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 0 0.5rem 2rem;
+  }
+
+  main {
+    grid-template-columns: 1fr;
+  }
+}

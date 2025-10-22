@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.dylib
+*.egg-info/
+.env
+venv/
+.git/
+.gitignore
+.cache/
+.mypy_cache/
+.pytest_cache/
+node_modules/
+frontend/node_modules/

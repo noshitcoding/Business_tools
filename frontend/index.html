@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rechnungstool Dashboard</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Rechnungstool Dashboard</h1>
+      <p>
+        Diese Oberfläche verbindet sich mit dem FastAPI-Backend und bietet einen Einstieg
+        in typische Aktionen wie den Gesundheitscheck oder das Abrufen offener Posten.
+      </p>
+    </header>
+
+    <main>
+      <section id="health-section" class="card">
+        <h2>Systemstatus</h2>
+        <p>
+          Überprüfe, ob der Backend-Service erreichbar ist. Die Abfrage nutzt den
+          <code>/health</code>-Endpunkt.
+        </p>
+        <button id="health-check">Gesundheitscheck ausführen</button>
+        <div id="health-result" class="result"></div>
+      </section>
+
+      <section id="open-items-section" class="card">
+        <h2>Offene Posten abrufen</h2>
+        <p>
+          Gibt eine Organisation-ID ein, um offene Rechnungen zu laden. Der Request
+          wird gegen den Endpunkt <code>/invoices/open</code> gestellt.
+        </p>
+        <form id="open-items-form">
+          <label for="organization-id">Organisation-ID</label>
+          <input id="organization-id" name="organization-id" type="number" min="1" required />
+          <button type="submit">Abrufen</button>
+        </form>
+        <div id="open-items-result" class="result"></div>
+      </section>
+
+      <section id="api-console" class="card">
+        <h2>API-Konsolenmodus</h2>
+        <p>
+          Führe beliebige GET-Anfragen gegen das Backend aus. Die Basis-URL wird automatisch
+          aus dem Frontend-Host abgeleitet.
+        </p>
+        <form id="console-form">
+          <label for="console-path">Pfad (z.&nbsp;B. <code>/users</code>)</label>
+          <input id="console-path" name="console-path" type="text" value="/health" required />
+          <button type="submit">Request senden</button>
+        </form>
+        <div id="console-result" class="result"></div>
+      </section>
+    </main>
+
+    <footer>
+      <small>
+        Hinweis: Diese Demo-Oberfläche deckt nur einen Teil der umfangreichen
+        Backend-Funktionalität ab und kann beliebig erweitert werden.
+      </small>
+    </footer>
+
+    <script src="./env.js"></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
