@@ -61,7 +61,8 @@ class InvoiceCreate(BaseModel):
         issue_date: Optional[date] = values.get("issue_date")
         terms: Optional[PaymentTerms] = values.get("payment_terms")
         if issue_date and terms:
-            return issue_date + timedelta(days=terms.due_days)
+            due_days = int(terms.due_days)
+            return issue_date + timedelta(days=due_days)
         return value
 
 
