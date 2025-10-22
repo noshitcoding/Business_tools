@@ -47,6 +47,62 @@ class Settings(BaseSettings):
         "InvoiceTool",
         description="Issuer name for OTP generation.",
     )
+    allowed_hosts: list[str] = Field(
+        default_factory=lambda: [
+            "localhost",
+            "127.0.0.1",
+            "0.0.0.0",
+            "rechnung-backend",
+            "testserver",
+        ],
+        description="Whitelisted host headers accepted by the API gateway.",
+    )
+    allowed_origins: list[str] = Field(
+        default_factory=lambda: [
+            "http://localhost",
+            "http://localhost:8080",
+            "http://127.0.0.1",
+            "http://127.0.0.1:8080",
+            "https://localhost",
+            "https://localhost:8080",
+            "https://127.0.0.1",
+            "https://127.0.0.1:8080",
+            "http://rechnung-frontend",
+        ],
+        description="Origins allowed to perform CORS requests.",
+    )
+    expose_docs: bool = Field(
+        False,
+        description="Expose interactive API documentation endpoints.",
+    )
+    force_https: bool = Field(
+        False,
+        description="Redirect all HTTP traffic to HTTPS.",
+    )
+    hsts_max_age: int = Field(
+        63072000,
+        description="Strict-Transport-Security max-age in seconds.",
+    )
+    hsts_include_subdomains: bool = Field(
+        True,
+        description="Append includeSubDomains to the HSTS header.",
+    )
+    hsts_preload: bool = Field(
+        True,
+        description="Append preload to the HSTS header.",
+    )
+    content_security_policy: str = Field(
+        "default-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+        description="Content-Security-Policy header value.",
+    )
+    referrer_policy: str = Field(
+        "strict-origin-when-cross-origin",
+        description="Referrer-Policy header value.",
+    )
+    permissions_policy: str = Field(
+        "geolocation=(), microphone=(), camera=()",
+        description="Permissions-Policy header value.",
+    )
 
     class Config:
         env_prefix = "INVOICE_TOOL_"
@@ -57,6 +113,12 @@ class Settings(BaseSettings):
         if isinstance(value, Path):
             return value
         return Path(str(value))
+
+    @validator("allowed_hosts", "allowed_origins", pre=True)
+    def _split_comma_separated(cls, value: Any):  # type: ignore[override]
+        if isinstance(value, str):
+            return [item.strip() for item in value.split(",") if item.strip()]
+        return value
 
 
 @lru_cache

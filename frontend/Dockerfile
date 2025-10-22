@@ -7,6 +7,7 @@ COPY styles.css /usr/share/nginx/html/styles.css
 COPY app.js /usr/share/nginx/html/app.js
 COPY env.js /usr/share/nginx/html/env.js
 COPY env.template.js /usr/share/nginx/html/env.template.js
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 RUN chmod +x /docker-entrypoint.sh

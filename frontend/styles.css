@@ -1,11 +1,47 @@
 :root {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #1f2933;
-  background-color: #f5f7fa;
+  color: #101828;
+  background-color: #f2f4f7;
 }
 
 body {
   margin: 0;
+  padding: 0 1rem 2.5rem;
+}
+
+header {
+  margin: 2.5rem auto 2rem;
+  max-width: 880px;
+  text-align: center;
+}
+
+header h1 {
+  margin-bottom: 0.75rem;
+}
+
+header p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+header .endpoint {
+  font-weight: 600;
+  color: #1d4ed8;
+}
+
+header code {
+  display: inline-block;
+  background: rgba(37, 99, 235, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  color: #1e293b;
+}
+
+main {
+  max-width: 880px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.75rem;
   padding: 0 1rem 2rem;
 }
 

@@ -8,6 +8,24 @@ const backendBaseUrl = (() => {
   return `${protocol}//${hostname}:${port}`;
 })();
 
+function normalizeUrl(url) {
+  try {
+    const normalized = new URL(url);
+    return normalized.origin;
+  } catch (error) {
+    return url;
+  }
+}
+
+const endpointElement = document.querySelector('#backend-endpoint');
+if (endpointElement) {
+  endpointElement.textContent = normalizeUrl(backendBaseUrl);
+}
+
+const yearElement = document.querySelector('#current-year');
+if (yearElement) {
+  yearElement.textContent = String(new Date().getFullYear());
+}
 const healthButton = document.querySelector('#health-check');
 const healthResult = document.querySelector('#health-result');
 const openItemsForm = document.querySelector('#open-items-form');
