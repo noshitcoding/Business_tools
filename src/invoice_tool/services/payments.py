@@ -19,6 +19,7 @@ def register_payment(payload: PaymentCreate) -> Payment:
         invoice = session.get(Invoice, payload.invoice_id)
         if not invoice:
             raise ValueError("Invoice not found")
+        existing_payments_total = sum(p.amount for p in invoice.payments)
         payment = Payment(
             invoice_id=payload.invoice_id,
             amount=payload.amount,
@@ -28,7 +29,6 @@ def register_payment(payload: PaymentCreate) -> Payment:
             source=payload.source,
         )
         session.add(payment)
-        existing_payments_total = sum(p.amount for p in invoice.payments)
         total_paid = existing_payments_total + payload.amount
         determine_status(invoice, total_paid)
         session.add(invoice)
