@@ -29,6 +29,8 @@ docker compose up --build
 
 - **rechnung-backend**: Startet die FastAPI-Anwendung auf Port `8000` mit gehärteter Sicherheitskonfiguration.
 - **rechnung-frontend**: Liefert eine minimierte, statische Verwaltungsoberfläche über Nginx auf Port `8080`.
+- **rechnung-backend**: Startet die FastAPI-Anwendung auf Port `8000`.
+- **rechnung-frontend**: Liefert das statische Dashboard über Nginx auf Port `8080`.
 
 Das Frontend leitet API-Aufrufe standardmäßig an `http://localhost:8000` weiter. Über die Umgebungsvariablen `BACKEND_URL` und `BACKEND_PORT` kann das Ziel zur Laufzeit überschrieben werden:
 
@@ -69,3 +71,14 @@ docker compose up --build rechnung-backend
 Die ausgelieferte Oberfläche fokussiert sich auf sicherheitsrelevante Hinweise statt interaktiver Debug-Funktionen. Sie zeigt den adressierten Backend-Endpunkt an und listet aktive Schutzmaßnahmen sowie empfohlene Betriebsrichtlinien auf.
 
 Individuelle Module (z. B. Freigabe- oder Reporting-Workflows) können hier verlinkt werden, ohne das Kern-API oder administrative Schnittstellen ungeschützt zu exponieren.
+- Backend API: <http://localhost:8000/docs>
+
+## Frontend-Funktionen
+
+Das ausgelieferte Frontend bietet einen schnellen Einstieg in zentrale Abläufe:
+
+- Sofortiger Gesundheitscheck gegen `/health` beim Laden der Seite.
+- Formular zum Abrufen offener Posten einer Organisation über `/invoices/open`.
+- Leichtgewichtige API-Konsole für ad-hoc GET-Anfragen an weitere Endpunkte.
+
+Die Oberfläche kann als Ausgangspunkt für erweiterte Dashboards dienen und lässt sich durch zusätzliche Skripte, Stile oder Build-Prozesse ergänzen.
