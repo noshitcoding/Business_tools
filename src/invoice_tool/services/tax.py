@@ -4,6 +4,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Iterable
 
+import pendulum
+
+from ..config import get_settings
 from ..models import Invoice, InvoiceLine, TaxCategory
 
 
@@ -49,9 +52,10 @@ def determine_status(invoice: Invoice, total_paid: float) -> None:
         return
     total_net, total_tax, _ = compute_tax(invoice.lines)
     outstanding = total_net + total_tax - total_paid
+    today = pendulum.now(get_settings().timezone).date()
     if outstanding <= 0:
         invoice.status = invoice.status.PAID
+    elif invoice.due_date and outstanding > 0 and invoice.due_date < today:
+        invoice.status = invoice.status.OVERDUE
     elif outstanding < total_net + total_tax:
         invoice.status = invoice.status.PARTLY_PAID
-    elif invoice.due_date and invoice.due_date < invoice.issue_date:
-        invoice.status = invoice.status.OVERDUE
