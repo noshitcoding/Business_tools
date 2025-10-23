@@ -8,6 +8,12 @@ from zoneinfo import ZoneInfo
 
 
 def _install_pydantic_stub() -> None:
+    try:
+        __import__("pydantic")
+        return
+    except ImportError:
+        pass
+
     if "pydantic" in sys.modules:
         return
 
@@ -44,6 +50,12 @@ _install_pydantic_stub()
 
 
 def _install_pendulum_stub() -> None:
+    try:
+        __import__("pendulum")
+        return
+    except ImportError:
+        pass
+
     if "pendulum" in sys.modules:
         return
 
@@ -101,6 +113,12 @@ _install_pendulum_stub()
 
 
 def _install_sqlalchemy_stub() -> None:
+    try:
+        __import__("sqlalchemy")
+        return
+    except ImportError:
+        pass
+
     if "sqlalchemy" in sys.modules:
         return
 
@@ -114,6 +132,12 @@ def _install_sqlalchemy_stub() -> None:
 
 
 def _install_sqlmodel_stub() -> None:
+    try:
+        __import__("sqlmodel")
+        return
+    except ImportError:
+        pass
+
     if "sqlmodel" in sys.modules:
         return
 
